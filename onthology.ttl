@@ -1,95 +1,147 @@
 # Prefissi (Namespaces)
+# I prefissi sono un modo per abbreviare gli URI completi, rendendo il codice più leggibile.
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .     # Resource Description Framework
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .   # RDF Schema (per gerarchie e descrizioni di base)
-@prefix owl: <http://www.w3.org/2002/07/owl#> .           # Web Ontology Language (per assiomi e logica)
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .   # RDF Schema (per gerarchie di classi e proprietà di base)
+@prefix owl: <http://www.w3.org/2002/07/owl#> .           # Web Ontology Language (per assiomi logici avanzati)
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .       # XML Schema Datatypes (per tipi di dati come stringhe, numeri, date)
 
-# Prefissi Generici Utili
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .             # Friend of a Friend (per persone, organizzazioni)
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   # Simple Knowledge Organization System (per vocabolari, tesauri)
-@prefix dc: <http://purl.org/dc/elements/1.1/> .         # Dublin Core (per metadati di base come titolo, creatore)
-@prefix dcterms: <http://purl.org/dc/terms/> .           # Dublin Core Terms (versione estesa di DC)
+# Prefissi Generici Comuni e Utili
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .             # Friend of a Friend (per persone, organizzazioni, relazioni sociali)
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   # Simple Knowledge Organization System (per vocabolari, tesauri, tassonomie)
+@prefix dc: <http://purl.org/dc/elements/1.1/> .         # Dublin Core (per metadati di base come titolo, creatore, data)
+@prefix dcterms: <http://purl.org/dc/terms/> .           # Dublin Core Terms (estensione del Dublin Core, con proprietà più specifiche)
 
-# Prefissi in Ambito Medico/Biomedico (Esempi)
-@prefix sio: <http://semanticscience.org/resource/> .    # Semanticscience Integrated Ontology (ontologia di alto livello per scienza)
-@prefix obo: <http://purl.obolibrary.org/obo/> .         # OBO Foundry (hub per ontologie biomediche, es. GO, ChEBI, Mondo)
-@prefix snomed: <http://purl.bioontology.org/ontology/SNOMEDCT/> . # SNOMED CT (sistema di codifica clinica)
-@prefix icd10: <http://purl.bioontology.org/ontology/ICD10CM/> . # ICD-10-CM (classificazione internazionale delle malattie)
-@prefix ncbi: <http://purl.bioontology.org/ontology/NCBITAXON/> . # NCBI Taxonomy (per tassonomia degli organismi)
-@prefix hpo: <http://purl.obolibrary.org/obo/HP_/> .     # Human Phenotype Ontology (per fenotipi umani)
+# Prefissi in Ambito Medico/Biomedico (Esempi e placeholder per riferimento)
+# Nota: Molte di queste ontologie sono molto grandi. Potresti volerle importare se usi molti dei loro concetti,
+# oppure semplicemente referenziarle se usi solo pochi termini specifici.
+@prefix sio: <http://semanticscience.org/resource/> .    # Semanticscience Integrated Ontology (ontologia di alto livello per scienza e dati)
+@prefix obo: <http://purl.obolibrary.org/obo/> .         # OBO Foundry (hub per ontologie biomediche, es. GO, ChEBI, Mondo Disease Ontology)
+@prefix mondo: <http://purl.obolibrary.org/obo/MONDO_/> . # Mondo Disease Ontology (per malattie)
+@prefix go: <http://purl.obolibrary.org/obo/GO_/> .       # Gene Ontology (per funzioni biologiche, processi, componenti cellulari)
 @prefix chebi: <http://purl.obolibrary.org/obo/CHEBI_/> . # Chemical Entities of Biological Interest (per entità chimiche)
-@prefix uniprot: <http://ppurl.org/uniprot/core#> .       # UniProt (per proteine)
+@prefix snomed: <http://purl.bioontology.org/ontology/SNOMEDCT/> . # SNOMED CT (sistema di codifica clinica - nota: l'URI può variare in base al resolver)
+@prefix icd10: <http://purl.bioontology.org/ontology/ICD10CM/> . # ICD-10-CM (classificazione internazionale delle malattie - nota: l'URI può variare)
+@prefix hpo: <http://purl.obolibrary.org/obo/HP_/> .     # Human Phenotype Ontology (per fenotipi umani)
+@prefix uniprot: <http://purl.org/uniprot/core#> .       # UniProt (per dati sulle proteine)
+@prefix ncit: <http://purl.bioontology.org/ontology/NCIT/> . # NCI Thesaurus (per termini nel cancro e altre aree cliniche)
+
 
 # Prefisso della Tua Ontologia
-@prefix myonto: <http://www.example.org/my-medical-ontology#> . # Questo è l'IRI base della TUA ONTOLOGIA
+# QUESTO È IL TUO PURL: https://purl.archive.org/purl/mao/onto
+@prefix mao: <https://purl.archive.org/purl/mao/onto#> . # Il tuo prefisso personalizzato per i concetti della tua ontologia
+
 
 ---
 
-# Dichiarazione dell'Ontologia
+# Dichiarazione dell'Ontologia Principale
+# Questo blocco definisce l'ontologia stessa come una risorsa OWL.
 
-myonto:MyMedicalOntology a owl:Ontology ;
-    rdfs:comment "Questa è l'ontologia di base per il dominio medico. È un punto di partenza per definire concetti e relazioni specifiche."@it ;
-    owl:versionIRI <http://www.example.org/my-medical-ontology/1.0> ; # Versione specifica della tua ontologia
-    owl:imports foaf: ; # Esempio di importazione di un'ontologia esterna
-    # owl:imports obo: ; # Puoi importare intere ontologie OBO se necessario
-    dc:creator "Il Tuo Nome/La Tua Organizzazione" ;
-    dc:date "2025-05-31"^^xsd:date .
+mao:OntologiaPrincipale a owl:Ontology ;
+    rdfs:comment "This is the main ontology for my medical project. It defines concepts and relationships in the healthcare domain."@en ;
+    owl:versionIRI <https://purl.archive.org/purl/mao/onto/1.0> ; # IRI per la versione specifica dell'ontologia
+    owl:imports foaf: ; # Esempio di importazione di un'ontologia esterna (FOAF in questo caso)
+    # Puoi aggiungere altre importazioni qui se necessario, ad es.:
+    # owl:imports mondo: ;
+    dc:creator "Daniele Di Lillo" ; # Il creatore dell'ontologia
+    dc:date "2025-06-12"^^xsd:date ; # La data di creazione/ultima modifica
+    dc:description "An ontology for modeling data and knowledge in the medical and healthcare sector."@en .
+
 
 ---
 
 # Sezione Classi (Concetti)
+# Qui definirai le classi principali del tuo dominio.
+# Ogni classe rappresenta un tipo di "cosa" o "concetto".
 
-# Esempio: Classe Medica Generale
-# myonto:CondizioneMedica a owl:Class ;
-#    rdfs:comment "Una condizione di salute o malattia."@it .
+mao:MedicalAction a owl:Class ;
+    rdfs:subClassOf foaf:Person ; # Un Paziente è anche una Persona (riuso da FOAF)
+    rdfs:comment "A medical action that can be performed"@en .
 
-# myonto:Paziente a owl:Class ;
-#    rdfs:subClassOf foaf:Person ; # Il paziente è una Persona (dal FOAF)
-#    rdfs:comment "Un individuo che riceve cure mediche."@it .
+# Esempio:
+# mao:Paziente a owl:Class ;
+#     rdfs:subClassOf foaf:Person ; # Un Paziente è anche una Persona (riuso da FOAF)
+#     rdfs:comment "Un individuo che riceve o ha ricevuto assistenza medica."@it .
 
-# myonto:Farmaco a owl:Class ;
-#    rdfs:comment "Una sostanza usata per il trattamento o la prevenzione."@it .
+# mao:Medico a owl:Class ;
+#     rdfs:subClassOf foaf:Person ;
+#     rdfs:comment "Un professionista sanitario autorizzato a praticare la medicina."@it .
+
+# mao:Malattia a owl:Class ;
+#     rdfs:comment "Una condizione anormale che colpisce il corpo di un organismo."@it .
+#     # Esempio di relazione con ontologie esterne:
+#     # owl:equivalentClass mondo:Disease . # Se vuoi dichiarare che è equivalente a un concetto in Mondo
+
+# mao:Trattamento a owl:Class ;
+#     rdfs:comment "Un'azione o un processo volto a curare o alleviare una condizione medica."@it .
+
 
 ---
 
 # Sezione Proprietà (Relazioni)
+# Qui definirai le relazioni tra le classi o tra una classe e un valore.
 
-# Esempio: Proprietà di Tipo Oggetto
-# myonto:haDiagnosiDi a owl:ObjectProperty ;
-#    rdfs:domain myonto:Paziente ;
-#    rdfs:range myonto:CondizioneMedica ;
-#    rdfs:comment "Relazione tra un paziente e la sua diagnosi."@it .
+# Proprietà di Tipo Oggetto (Relazioni tra istanze di classi)
+# Esempio:
+# mao:haDiagnosiDi a owl:ObjectProperty ;
+#     rdfs:comment "Relazione tra un paziente e la diagnosi di una malattia."@it ;
+#     rdfs:domain mao:Paziente ;
+#     rdfs:range mao:Malattia .
 
-# Esempio: Proprietà di Tipo Dato
-# myonto:dosaggio a owl:DatatypeProperty ;
-#    rdfs:domain myonto:Farmaco ;
-#    rdfs:range xsd:string ; # Oppure xsd:decimal se solo un numero
-#    rdfs:comment "Il dosaggio raccomandato di un farmaco."@it .
+# mao:tratta a owl:ObjectProperty ;
+#     rdfs:comment "Relazione tra un medico e una condizione medica o un paziente che tratta."@it ;
+#     rdfs:domain mao:Medico ;
+#     rdfs:range mao:Malattia . # O mao:Paziente, a seconda della granularità desiderata
+
+# Proprietà di Tipo Dato (Relazioni tra istanze di classi e valori letterali)
+# Esempio:
+# mao:dataNascita a owl:DatatypeProperty ;
+#     rdfs:comment "La data di nascita di una persona."@it ;
+#     rdfs:domain foaf:Person ; # Puoi usare classi importate come dominio
+#     rdfs:range xsd:date .
+
+# mao:valoreSanguigno a owl:DatatypeProperty ;
+#     rdfs:comment "Un valore numerico misurato nel sangue."@it ;
+#     rdfs:domain mao:EsameDiLaboratorio ; # Esempio: devi prima definire mao:EsameDiLaboratorio
+#     rdfs:range xsd:decimal .
+
 
 ---
 
 # Sezione Assiomi OWL (Regole Logiche e Restrizioni)
+# Qui puoi aggiungere regole più complesse per definire meglio le tue classi e proprietà,
+# abilitando capacità di ragionamento.
 
-# Esempio: Un Paziente deve avere almeno una diagnosi
-# myonto:Paziente rdfs:subClassOf [
+# Esempio: Ogni Paziente deve avere almeno una diagnosi
+# mao:Paziente rdfs:subClassOf [
 #     a owl:Restriction ;
-#     owl:onProperty myonto:haDiagnosiDi ;
+#     owl:onProperty mao:haDiagnosiDi ;
 #     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-#     owl:onClass myonto:CondizioneMedica ;
+#     owl:onClass mao:Malattia ;
 # ] .
+
+# Esempio: Un Medico non può essere anche un Paziente (Disgiunzione)
+# mao:Medico owl:disjointWith mao:Paziente .
+
 
 ---
 
 # Sezione Istanze (Dati Esemplificativi)
+# Qui puoi popolare la tua ontologia con esempi di dati reali che si conformano alle tue classi e proprietà.
 
-# Esempio: Istanza di un Paziente
-# myonto:paziente123 a myonto:Paziente ;
-#    foaf:firstName "Marco" ;
-#    foaf:lastName "Rossi" ;
-#    myonto:haDiagnosiDi myonto:influenza . # Assumendo myonto:influenza sia un'istanza di myonto:CondizioneMedica
+# Esempio:
+# mao:marcoRossi a mao:Paziente ;
+#     foaf:firstName "Marco" ;
+#     foaf:lastName "Rossi" ;
+#     mao:dataNascita "1980-05-15"^^xsd:date ;
+#     mao:haDiagnosiDi mao:ipertensione . # Assumendo che mao:ipertensione sia un'istanza di mao:Malattia
 
-# Esempio: Istanza di una Condizione Medica
-# myonto:influenza a myonto:CondizioneMedica ;
-#    dc:title "Influenza stagionale"@it ;
-#    snomed:conceptId "1234567"^^xsd:string . # Esempio di collegamento a un ID SNOMED
+# mao:dottorBianchi a mao:Medico ;
+#     foaf:firstName "Paolo" ;
+#     foaf:lastName "Bianchi" ;
+#     mao:specializzazione "Cardiologia"^^xsd:string . # Esempio di nuova proprietà
+
+# mao:ipertensione a mao:Malattia ;
+#     rdfs:label "Ipertensione Essenziale" . # Etichetta leggibile
+#     # Esempio di collegamento a un sistema di codifica esterno:
+#     # snomed:conceptId "383410000"^^xsd:string . # Questo non è un PURL di SNOMED reale, solo un esempio
