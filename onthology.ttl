@@ -1,6 +1,3 @@
-# Prefissi (Namespaces)
-# I prefissi sono un modo per abbreviare gli URI completi, rendendo il codice più leggibile.
-
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .     # Resource Description Framework
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .   # RDF Schema (per gerarchie di classi e proprietà di base)
 @prefix owl: <http://www.w3.org/2002/07/owl#> .           # Web Ontology Language (per assiomi logici avanzati)
