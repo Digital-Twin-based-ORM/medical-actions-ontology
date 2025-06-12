@@ -1,0 +1,95 @@
+# Prefissi (Namespaces)
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .     # Resource Description Framework
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .   # RDF Schema (per gerarchie e descrizioni di base)
+@prefix owl: <http://www.w3.org/2002/07/owl#> .           # Web Ontology Language (per assiomi e logica)
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .       # XML Schema Datatypes (per tipi di dati come stringhe, numeri, date)
+
+# Prefissi Generici Utili
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .             # Friend of a Friend (per persone, organizzazioni)
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   # Simple Knowledge Organization System (per vocabolari, tesauri)
+@prefix dc: <http://purl.org/dc/elements/1.1/> .         # Dublin Core (per metadati di base come titolo, creatore)
+@prefix dcterms: <http://purl.org/dc/terms/> .           # Dublin Core Terms (versione estesa di DC)
+
+# Prefissi in Ambito Medico/Biomedico (Esempi)
+@prefix sio: <http://semanticscience.org/resource/> .    # Semanticscience Integrated Ontology (ontologia di alto livello per scienza)
+@prefix obo: <http://purl.obolibrary.org/obo/> .         # OBO Foundry (hub per ontologie biomediche, es. GO, ChEBI, Mondo)
+@prefix snomed: <http://purl.bioontology.org/ontology/SNOMEDCT/> . # SNOMED CT (sistema di codifica clinica)
+@prefix icd10: <http://purl.bioontology.org/ontology/ICD10CM/> . # ICD-10-CM (classificazione internazionale delle malattie)
+@prefix ncbi: <http://purl.bioontology.org/ontology/NCBITAXON/> . # NCBI Taxonomy (per tassonomia degli organismi)
+@prefix hpo: <http://purl.obolibrary.org/obo/HP_/> .     # Human Phenotype Ontology (per fenotipi umani)
+@prefix chebi: <http://purl.obolibrary.org/obo/CHEBI_/> . # Chemical Entities of Biological Interest (per entità chimiche)
+@prefix uniprot: <http://ppurl.org/uniprot/core#> .       # UniProt (per proteine)
+
+# Prefisso della Tua Ontologia
+@prefix myonto: <http://www.example.org/my-medical-ontology#> . # Questo è l'IRI base della TUA ONTOLOGIA
+
+---
+
+# Dichiarazione dell'Ontologia
+
+myonto:MyMedicalOntology a owl:Ontology ;
+    rdfs:comment "Questa è l'ontologia di base per il dominio medico. È un punto di partenza per definire concetti e relazioni specifiche."@it ;
+    owl:versionIRI <http://www.example.org/my-medical-ontology/1.0> ; # Versione specifica della tua ontologia
+    owl:imports foaf: ; # Esempio di importazione di un'ontologia esterna
+    # owl:imports obo: ; # Puoi importare intere ontologie OBO se necessario
+    dc:creator "Il Tuo Nome/La Tua Organizzazione" ;
+    dc:date "2025-05-31"^^xsd:date .
+
+---
+
+# Sezione Classi (Concetti)
+
+# Esempio: Classe Medica Generale
+# myonto:CondizioneMedica a owl:Class ;
+#    rdfs:comment "Una condizione di salute o malattia."@it .
+
+# myonto:Paziente a owl:Class ;
+#    rdfs:subClassOf foaf:Person ; # Il paziente è una Persona (dal FOAF)
+#    rdfs:comment "Un individuo che riceve cure mediche."@it .
+
+# myonto:Farmaco a owl:Class ;
+#    rdfs:comment "Una sostanza usata per il trattamento o la prevenzione."@it .
+
+---
+
+# Sezione Proprietà (Relazioni)
+
+# Esempio: Proprietà di Tipo Oggetto
+# myonto:haDiagnosiDi a owl:ObjectProperty ;
+#    rdfs:domain myonto:Paziente ;
+#    rdfs:range myonto:CondizioneMedica ;
+#    rdfs:comment "Relazione tra un paziente e la sua diagnosi."@it .
+
+# Esempio: Proprietà di Tipo Dato
+# myonto:dosaggio a owl:DatatypeProperty ;
+#    rdfs:domain myonto:Farmaco ;
+#    rdfs:range xsd:string ; # Oppure xsd:decimal se solo un numero
+#    rdfs:comment "Il dosaggio raccomandato di un farmaco."@it .
+
+---
+
+# Sezione Assiomi OWL (Regole Logiche e Restrizioni)
+
+# Esempio: Un Paziente deve avere almeno una diagnosi
+# myonto:Paziente rdfs:subClassOf [
+#     a owl:Restriction ;
+#     owl:onProperty myonto:haDiagnosiDi ;
+#     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+#     owl:onClass myonto:CondizioneMedica ;
+# ] .
+
+---
+
+# Sezione Istanze (Dati Esemplificativi)
+
+# Esempio: Istanza di un Paziente
+# myonto:paziente123 a myonto:Paziente ;
+#    foaf:firstName "Marco" ;
+#    foaf:lastName "Rossi" ;
+#    myonto:haDiagnosiDi myonto:influenza . # Assumendo myonto:influenza sia un'istanza di myonto:CondizioneMedica
+
+# Esempio: Istanza di una Condizione Medica
+# myonto:influenza a myonto:CondizioneMedica ;
+#    dc:title "Influenza stagionale"@it ;
+#    snomed:conceptId "1234567"^^xsd:string . # Esempio di collegamento a un ID SNOMED
