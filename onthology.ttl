@@ -2,16 +2,10 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .   # RDF Schema (per gerarchie di classi e proprietà di base)
 @prefix owl: <http://www.w3.org/2002/07/owl#> .           # Web Ontology Language (per assiomi logici avanzati)
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .       # XML Schema Datatypes (per tipi di dati come stringhe, numeri, date)
-
-# Prefissi Generici Comuni e Utili
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .             # Friend of a Friend (per persone, organizzazioni, relazioni sociali)
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .   # Simple Knowledge Organization System (per vocabolari, tesauri, tassonomie)
 @prefix dc: <http://purl.org/dc/elements/1.1/> .         # Dublin Core (per metadati di base come titolo, creatore, data)
 @prefix dcterms: <http://purl.org/dc/terms/> .           # Dublin Core Terms (estensione del Dublin Core, con proprietà più specifiche)
-
-# Prefissi in Ambito Medico/Biomedico (Esempi e placeholder per riferimento)
-# Nota: Molte di queste ontologie sono molto grandi. Potresti volerle importare se usi molti dei loro concetti,
-# oppure semplicemente referenziarle se usi solo pochi termini specifici.
 @prefix sio: <http://semanticscience.org/resource/> .    # Semanticscience Integrated Ontology (ontologia di alto livello per scienza e dati)
 @prefix obo: <http://purl.obolibrary.org/obo/> .         # OBO Foundry (hub per ontologie biomediche, es. GO, ChEBI, Mondo Disease Ontology)
 @prefix mondo: <http://purl.obolibrary.org/obo/MONDO_/> . # Mondo Disease Ontology (per malattie)
@@ -22,37 +16,21 @@
 @prefix hpo: <http://purl.obolibrary.org/obo/HP_/> .     # Human Phenotype Ontology (per fenotipi umani)
 @prefix uniprot: <http://purl.org/uniprot/core#> .       # UniProt (per dati sulle proteine)
 @prefix ncit: <http://purl.bioontology.org/ontology/NCIT/> . # NCI Thesaurus (per termini nel cancro e altre aree cliniche)
-
-
-# Prefisso della Tua Ontologia
-# QUESTO È IL TUO PURL: https://purl.archive.org/purl/mao/onto
 @prefix mao: <https://purl.archive.org/purl/mao/onto#> . # Il tuo prefisso personalizzato per i concetti della tua ontologia
-
-
----
 
 # Dichiarazione dell'Ontologia Principale
 # Questo blocco definisce l'ontologia stessa come una risorsa OWL.
 
-mao:OntologiaPrincipale a owl:Ontology ;
-    rdfs:comment "This is the main ontology for my medical project. It defines concepts and relationships in the healthcare domain."@en ;
-    owl:versionIRI <https://purl.archive.org/purl/mao/onto/1.0> ; # IRI per la versione specifica dell'ontologia
-    owl:imports foaf: ; # Esempio di importazione di un'ontologia esterna (FOAF in questo caso)
-    # Puoi aggiungere altre importazioni qui se necessario, ad es.:
-    # owl:imports mondo: ;
-    dc:creator "Daniele Di Lillo" ; # Il creatore dell'ontologia
-    dc:date "2025-06-12"^^xsd:date ; # La data di creazione/ultima modifica
-    dc:description "An ontology for modeling data and knowledge in the medical and healthcare sector."@en .
-
-
----
+<https://purl.archive.org/domain/mao/onto> rdf:type owl:Ontology ;
+                                owl:imports foaf: ;
+                                rdfs:comment "Formal model of FHIR Clinical Resources" ;
+                                rdfs:label "FHIR Model Ontology" .
 
 # Sezione Classi (Concetti)
 # Qui definirai le classi principali del tuo dominio.
 # Ogni classe rappresenta un tipo di "cosa" o "concetto".
 
 mao:MedicalAction a owl:Class ;
-    rdfs:subClassOf foaf:Person ; # Un Paziente è anche una Persona (riuso da FOAF)
     rdfs:comment "A medical action that can be performed"@en .
 
 # Esempio:
@@ -72,8 +50,6 @@ mao:MedicalAction a owl:Class ;
 # mao:Trattamento a owl:Class ;
 #     rdfs:comment "Un'azione o un processo volto a curare o alleviare una condizione medica."@it .
 
-
----
 
 # Sezione Proprietà (Relazioni)
 # Qui definirai le relazioni tra le classi o tra una classe e un valore.
@@ -103,8 +79,6 @@ mao:MedicalAction a owl:Class ;
 #     rdfs:range xsd:decimal .
 
 
----
-
 # Sezione Assiomi OWL (Regole Logiche e Restrizioni)
 # Qui puoi aggiungere regole più complesse per definire meglio le tue classi e proprietà,
 # abilitando capacità di ragionamento.
@@ -120,8 +94,6 @@ mao:MedicalAction a owl:Class ;
 # Esempio: Un Medico non può essere anche un Paziente (Disgiunzione)
 # mao:Medico owl:disjointWith mao:Paziente .
 
-
----
 
 # Sezione Istanze (Dati Esemplificativi)
 # Qui puoi popolare la tua ontologia con esempi di dati reali che si conformano alle tue classi e proprietà.
