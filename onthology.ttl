@@ -39,7 +39,7 @@ mao:AddSurgery a owl:Class ;
     rdfs:comment "The action that adds a surgery to a patient"@en .
 
 # Sezione proprietà
-mmaoyont:isDone rdf:type owl:DatatypeProperty ;
+mao:isDone rdf:type owl:DatatypeProperty ;
     rdfs:label "Is Done (Procedure Status Extension)"@en ;
     rdfs:comment "Indica se una procedura è stata completata o meno (True/False)."@en ;
     # Definisce che questa proprietà può essere applicata alla classe FHIR Procedure
