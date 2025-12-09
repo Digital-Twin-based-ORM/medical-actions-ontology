@@ -16,12 +16,13 @@
 @prefix hpo: <http://purl.obolibrary.org/obo/HP_/> .     # Human Phenotype Ontology (per fenotipi umani)
 @prefix uniprot: <http://purl.org/uniprot/core#> .       # UniProt (per dati sulle proteine)
 @prefix ncit: <http://purl.bioontology.org/ontology/NCIT/> . # NCI Thesaurus (per termini nel cancro e altre aree cliniche)
-@prefix mao: <https://purl.archive.org/purl/mao/onto#> . # Il tuo prefisso personalizzato per i concetti della tua ontologia
+@prefix mao: <https://purl.org/mao/onto> . # Il tuo prefisso personalizzato per i concetti della tua ontologia
+@prefix fhir: <http://hl7.org/fhir/> . # Prefisso per l'ontologia FHIR
 
 # Dichiarazione dell'Ontologia Principale
 # Questo blocco definisce l'ontologia stessa come una risorsa OWL.
 
-<https://purl.archive.org/domain/mao/onto> rdf:type owl:Ontology ;
+<https://purl.org/mao/onto> rdf:type owl:Ontology ;
                                 owl:imports foaf: ;
                                 rdfs:comment "Formal model of FHIR Clinical Resources" ;
                                 rdfs:label "FHIR Model Ontology" .
@@ -36,3 +37,12 @@ mao:MedicalAction a owl:Class ;
 mao:AddSurgery a owl:Class ;
     rdfs:subClassOf mao:MedicalAction ;
     rdfs:comment "The action that adds a surgery to a patient"@en .
+
+# Sezione proprietà
+mmaoyont:isDone rdf:type owl:DatatypeProperty ;
+    rdfs:label "Is Done (Procedure Status Extension)"@en ;
+    rdfs:comment "Indica se una procedura è stata completata o meno (True/False)."@en ;
+    # Definisce che questa proprietà può essere applicata alla classe FHIR Procedure
+    rdfs:domain fhir:Procedure ; 
+    # Definisce che il valore deve essere un booleano (vero o falso)
+    rdfs:range xsd:boolean .
