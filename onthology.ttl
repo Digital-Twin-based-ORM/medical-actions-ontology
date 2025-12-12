@@ -46,3 +46,11 @@ mao:isDone rdf:type owl:DatatypeProperty ;
     rdfs:domain fhir:Procedure ; 
     # Definisce che il valore deve essere un booleano (vero o falso)
     rdfs:range xsd:boolean .
+
+mao:waitingListDate rdf:type owl:DatatypeProperty ;
+    rdfs:label "Waiting List Entry Date"@en ;
+    rdfs:comment "Data in cui il paziente è stato formalmente inserito in lista di attesa per il servizio richiesto."@en ;
+    # Applicabile alla risorsa di procedura
+    rdfs:domain fhir:Procedure ;
+    # Il valore deve essere un timestamp completo o una data
+    rdfs:range xsd:dateTime .
