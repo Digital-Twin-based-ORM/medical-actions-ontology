@@ -56,7 +56,13 @@ mao:waitingListDate rdf:type owl:DatatypeProperty ;
     rdfs:range xsd:dateTime .
 
 mao:priority rdf:type owl:DatatypeProperty ;
-    rdfs:label "surgery priority level"@en ;
+    rdfs:label "Surgery priority level"@en ;
     rdfs:comment "Priorità assegnata all'intervento chirurgico"@en ;
     rdfs:domain fhir:Procedure ;
     rdfs:range xsd:string .
+
+mao:executionDate rdf:type owl:DatatypeProperty ;
+    rdfs:label "Surgery execution date"@en ;
+    rdfs:comment "Data di esecuzione dell'intervento chirurgico"@en ;
+    rdfs:domain fhir:Procedure ;
+    rdfs:range xsd:dateTime .
