@@ -54,3 +54,9 @@ mao:waitingListDate rdf:type owl:DatatypeProperty ;
     rdfs:domain fhir:Procedure ;
     # Il valore deve essere un timestamp completo o una data
     rdfs:range xsd:dateTime .
+
+mao:priority rdf:type owl:DatatypeProperty ;
+    rdfs:label "surgery priority level"@en ;
+    rdfs:comment "Priorità assegnata all'intervento chirurgico"@en ;
+    rdfs:domain fhir:Procedure ;
+    rdfs:range xsd:string .
